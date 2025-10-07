@@ -1,0 +1,18 @@
+{
+    "python.defaultInterpreterPath": "/home/fyj/miniconda3/envs/llava-med/bin/python",
+    "editor.detectIndentation": false,
+    "python.autoComplete.extraPaths":["/home/fyj/miniconda3/envs/llava-med/bin/python"
+    ],
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.diagnosticSeverityOverrides": {},
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}"
+    ],
+    "cursorpyright.analysis.autoImportCompletions": true,
+    "cursorpyright.analysis.diagnosticSeverityOverrides": {},
+    "cursorpyright.analysis.extraPaths": [
+        "${workspaceFolder}"
+    ],
+    "python.analysis.typeCheckingMode": "off",
+    "python.languageServer": "Jedi"
+}

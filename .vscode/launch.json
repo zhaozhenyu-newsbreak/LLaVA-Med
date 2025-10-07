@@ -1,0 +1,118 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python from root current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}",
+                "CUDA_VISIBLE_DEVICES": "0"
+            },
+            "python": "/home/fyj/miniconda3/envs/llava-med/bin/python",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "49 Python from root current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}",
+                "CUDA_VISIBLE_DEVICES": "1"
+            },
+            "python": "/home/cpp/miniconda3/envs/zzy-llm/bin/python",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "86 Python from root current File ",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}",
+                "CUDA_VISIBLE_DEVICES": "6"
+            },
+            "python": "/home/cpp/.conda/envs/zzy-llm/bin/python",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Python Debugger: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "deepspeed run with debugger",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/cpp/anaconda3/envs/zzy-llm/bin/deepspeed",
+            "justMyCode": false,
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}",
+                "WANDB_API_KEY": "d090c21db1bf7268f823a69b13d8c549268db48f",
+                "WANDB_PROJECT": "pretrain_vllm",
+                "TOKENIZERS_PARALLELISM": "true",
+            },
+            "cwd": "${workspaceFolder}",
+            "args": [
+                "--include", "localhost:0,2,3,4",
+                "--master_port", "39700",
+                "llm_training/train/vllm_flow/vllava_finetune_oneturn.py",
+                "--vision_model_name_or_path", "openai/clip-vit-large-patch14",
+                "--text_model_name_or_path", "meta-llama/Llama-2-7b-hf",
+                "--output_dir", "/mnt/share16t/zhaozhenyu/models/vllava_finetune_oneturn",
+                "--do_train", "True",
+                "--pretrain", "True",
+                "--frames", "100",
+                "--vision_token", "<image>",
+                "--patch_num", "1",
+                "--use_img_start_token", "False",
+                "--use_img_end_token", "False",
+                "--use_video_start_token", "False",
+                "--use_video_end_token", "False",
+                "--model_max_length", "3000",
+                "--projector_hidden_act", "gelu",
+                "--vision_feature_select_strategy", "default",
+                "--vision_feature_layer", "-2",
+                "--vision_feature_type", "cls",
+                "--train_path", "/home/paperspace/zhenyu/data/video_caption_dataset_v1_dev.jsonl",
+                "--dev_path", "/home/paperspace/zhenyu/data/video_caption_dataset_v1_dev.jsonl",
+                "--num_train_epochs", "4",
+                "--learning_rate", "1e-3",
+                "--dataset_name", "one_turn_vllava",
+                "--bf16", "True",
+                "--tf32", "True",
+                "--per_device_train_batch_size", "4",
+                "--per_device_eval_batch_size", "4",
+                "--gradient_accumulation_steps", "1",
+                "--report_to", "wandb",
+                "--ddp_find_unused_parameters", "False",
+                "--logging_steps", "10",
+                "--run_name", "debug",
+                "--lr_scheduler_type", "cosine",
+                "--warmup_ratio", "0.02",
+                "--save_steps", "1000",
+                "--save_total_limit", "1",
+                "--overwrite_output_dir",
+                "--evaluation_strategy", "steps",
+                "--gradient_checkpointing", "True",
+                "--save_strategy", "steps",
+                "--eval_steps", "100",
+                "--deepspeed", "./llm_training/configs/ds/ds_3_hf_offload.json"
+            ]
+        }
+    ]
+}
