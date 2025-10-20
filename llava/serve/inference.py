@@ -16,6 +16,7 @@ class LlavaInference:
     def __init__(self, model_path='/home/fyj/projects/llava-med-v1.5-mistral-7b', 
                  model_name='llava-med-v1.5-mistral-7b', **kwargs):
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        print(f"device:{self.device}")
         self.tokenizer, self.model, self.image_processor, self.context_len = load_pretrained_model(
             model_path=model_path,
             model_name=model_name,
@@ -69,11 +70,22 @@ class LlavaInference:
                                                **image_args)
             text = self.tokenizer.decode(generate_ids[0], skip_special_tokens=False)
             return text
+        
+    def inference_from_system_input(self):
+        while True:
+            try:
+                prompt = input("Enter a prompt: ")
+                image_path = input("Enter an image path: ")
+                print(self.inference_one(prompt, [image_path]))
+            except Exception as e:
+                print(f"Error: {e}")
+                continue
     
 if __name__ == '__main__':
     inference = LlavaInference()
-    print(inference.inference_one(prompt='Is there a breast tumor in this image? Please answer yes or no first, and then provide an explanation.', 
-                                #   image_paths=None,
-                                  image_paths=['/home/fyj/projects/BUS/bus/task-data/zs/processed/29-05-20201123-001/D/89-img.png'],
-                                #   image_paths=['/home/fyj/projects/LLaVA-Med/test.png']
-                                  ))
+    # print(inference.inference_one(prompt='Is there a breast tumor in this image? Please answer yes or no first, and then provide an explanation.', 
+    #                             #   image_paths=None,
+    #                               image_paths=['/home/fyj/projects/BUS/bus/task-data/zs/processed/29-05-20201123-001/D/89-img.png'],
+    #                             #   image_paths=['/home/fyj/projects/LLaVA-Med/test.png']
+    #                               ))
+    inference.inference_from_system_input()

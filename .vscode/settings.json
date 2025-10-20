@@ -14,5 +14,5 @@
         "${workspaceFolder}"
     ],
     "python.analysis.typeCheckingMode": "off",
-    "python.languageServer": "Jedi"
+    "python.languageServer": "None"
 }
